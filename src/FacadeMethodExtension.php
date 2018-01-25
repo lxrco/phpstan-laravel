@@ -79,14 +79,18 @@ final class FacadeMethodExtension implements MethodsClassReflectionExtension, Br
                 $instance = $class::getFacadeRoot();
 
                 $instanceReflection = $this->broker->getClass(get_class($instance));
-                $this->methods[$classReflection->getName()] = $this->createMethods($classReflection,
-                    $instanceReflection);
+                $this->methods[$classReflection->getName()] = $this->createMethods(
+                    $classReflection,
+                    $instanceReflection
+                );
 
                 if (isset($this->extensions[$instanceReflection->getName()])) {
                     $extensionMethod = $this->extensions[$instanceReflection->getName()];
                     $extensionReflection = $this->broker->getClass(get_class($instance->$extensionMethod()));
-                    $this->methods[$classReflection->getName()] += $this->createMethods($classReflection,
-                        $extensionReflection);
+                    $this->methods[$classReflection->getName()] += $this->createMethods(
+                        $classReflection,
+                        $extensionReflection
+                    );
                 }
             }
         }

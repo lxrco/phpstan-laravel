@@ -23,6 +23,7 @@ final class HelpersReturnTypeExtension implements DynamicFunctionReturnTypeExten
         'validator',
         'view',
         'redirect',
+        'response',
     ];
 
     /**
@@ -75,6 +76,12 @@ final class HelpersReturnTypeExtension implements DynamicFunctionReturnTypeExten
                     return new ObjectType(\Illuminate\Routing\Redirector::class);
                 }
                 return new ObjectType(\Illuminate\Http\RedirectResponse::class);
+
+            case 'response':
+                if (empty($functionCall->args)) {
+                    return new ObjectType(\Illuminate\Contracts\Routing\ResponseFactory::class);
+                }
+                return new ObjectType(\Symfony\Component\HttpFoundation\Response::class);
         }
 
         return new MixedType();
