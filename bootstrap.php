@@ -15,4 +15,6 @@ if (!isset($app)) {
     throw new Exception('Could not find app boostrap, tried: ' . implode(', ', $paths));
 }
 
-$app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+if ($app instanceof Illuminate\Foundation\Application) {
+    $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+}
