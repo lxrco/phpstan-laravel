@@ -41,7 +41,7 @@ final class BuilderMethodExtension implements MethodsClassReflectionExtension, B
     /**
      * @inheritdoc
      */
-    public function setBroker(Broker $broker)
+    public function setBroker(Broker $broker): void
     {
         $this->broker = $broker;
     }
